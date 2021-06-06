@@ -1,0 +1,50 @@
+.auth-main{
+    
+    width: 90%;
+    margin: 4rem auto;
+    border: 1px solid rgb(19, 14, 14);
+    padding: 1rem;
+    padding-bottom: 3rem;
+}
+
+.auth-main::after {
+    content: "";
+    background-image: url(https://source.unsplash.com/1380x720/?Pizza);
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
+
+.auth__form {
+    width: 90%;
+    margin: auto;
+    font-weight: 900;
+}
+
+.auth__form h1 {
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 900;
+}
+
+.auth__mode-control {
+    text-align: center;
+    margin: 1rem;
+}
+
+@media (min-width: 768px) {
+    .auth-main{
+        width: 90%;
+        margin: 4rem auto;
+        padding: 1rem;
+        padding-bottom: 3rem;
+    }
+    
+    .auth__form {
+        width: 40rem;
+    }
+}
