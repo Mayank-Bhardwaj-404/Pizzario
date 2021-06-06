@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import './Auth.css';
 import Input from '../../components/Input/Input';
@@ -15,13 +16,8 @@ class AuthPage extends Component {
     };
 
     render() {
-        let modeButtonText = 'Switch to Signup';
         let submitButtonText = 'Login';
 
-        if (this.props.mode === 'signup') {
-            modeButtonText = 'Switch to Login';
-            submitButtonText = 'Signup';
-        }
         return (
             <main className="auth-main">
                 <form className="auth__form" onSubmit={event =>
@@ -29,16 +25,14 @@ class AuthPage extends Component {
                         email: this.state.email,
                         password: this.state.password
                     })}>
-                    <h1>Login / SignUp</h1>
+                    <h1>Login for Admin</h1>
                     <Input label="E-Mail" config={{ type: 'email' }} onChange={event => this.inputChangeHandler(event, 'email')} />
                     <Input label="Password" config={{ type: 'password' }} onChange={event => this.inputChangeHandler(event, 'password')} />
                     <Button type="submit">{submitButtonText}</Button>
                 </form>
-                <section className="auth__mode-control">
-                    <Button type="button" onClick={this.props.onAuthModeChange}>
-                        {modeButtonText}
-                    </Button>
-                </section>
+                <section className="Menu">
+                    <Link to={'/Menu'}><Button>See Menu</Button></Link>
+                </section> 
             </main>
         );
     }

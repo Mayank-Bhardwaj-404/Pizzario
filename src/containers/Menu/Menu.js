@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Products from '../../components/Products/Products';
+import Products from './Products';
 
-class ProductsPage extends Component {
+class Menu extends Component {
     state = { 
         isLoading: true, 
         products: [] 
@@ -12,17 +12,6 @@ class ProductsPage extends Component {
     componentDidMount() {
         this.fetchData();
     }
-    
-    productDeleteHandler = productId => {
-        axios.delete('/products/' + productId)
-        .then(result => {
-            this.fetchData();
-        })
-        .catch(err => {
-            this.props.onError('Deleting the product failed. Please try again later');
-            console.log(err);
-        });
-    };
 
     fetchData = () => {
         axios.get('/products')
@@ -40,7 +29,7 @@ class ProductsPage extends Component {
         let content = <p>Loading products...</p>;
 
         if (!this.state.isLoading && this.state.products.length > 0) {
-            content = <Products products={this.state.products}  onDeleteProduct={this.productDeleteHandler} /> ;
+            content = <Products products={this.state.products} /> ;
         }
         if (!this.state.isLoading && this.state.products.length === 0) {
             content = <p className="Error-msgs">No products found. Try again later.</p>;
@@ -49,4 +38,4 @@ class ProductsPage extends Component {
     }
 }
 
-export default ProductsPage;
+export default Menu;

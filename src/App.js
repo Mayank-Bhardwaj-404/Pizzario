@@ -9,6 +9,7 @@ import ProductsPage from './containers/Product/ProductsPage';
 import ProductPage from './containers/Product/ProductPage';
 import EditProduct from './containers/Product/EditProduct';
 import AuthPage from './containers/Auth/Auth';
+import Menu from './containers/Menu/Menu';
 
 class App extends Component {
   state = {
@@ -17,7 +18,7 @@ class App extends Component {
     error: null
   };
 
-
+  
   // AUTHENTICATION HANDLER
   authHandler = (event, authData) => {
     event.preventDefault();
@@ -26,13 +27,9 @@ class App extends Component {
     if (authData.email.trim() === '' || authData.password.trim() === '') {
       return;
     }
-    
-    if (this.state.authMode === 'login') {
-      request = axios.post('/login', authData);
-    } else {
-      request = axios.post('/signup', authData);
-    }
-
+      
+    request = axios.post('/login', authData);
+  
     request.then(authResponse => {
         if (authResponse.status === 201 || authResponse.status === 200) {
           const token = authResponse.data.token;
@@ -46,17 +43,6 @@ class App extends Component {
         this.setState({ isAuth: false });
       });
   };
-
-
-  // AUTHENTICATION MODE CHANGE
-  authModeChangedHandler = () => {
-    this.setState(prevState => {
-      return {
-        authMode: prevState.authMode === 'login' ? 'signup' : 'login'
-      };
-    });
-  };
-
 
   // LOGOUT HANDLER
   logoutHandler = () => {
@@ -99,11 +85,13 @@ class App extends Component {
       routes = (
         <Switch>
           <Redirect from="/" to="/auth" exact />
+          <Redirect from="/" to="/Menu" exact/>
           <Redirect from="/products" to="/auth" />
           <Redirect from="/product" to="/auth" />
           <Route path="/auth" render={() => (
-              <AuthPage mode={this.state.authMode} onAuth={this.authHandler} onAuthModeChange={this.authModeChangedHandler} />
-          )}/>
+              <AuthPage mode={this.state.authMode} onAuth={this.authHandler} />)}/>
+          <Route path="/Menu" render={props => (
+              <Menu {...props} onError={this.errorHandler} />)}/>
         </Switch>
       );
     }

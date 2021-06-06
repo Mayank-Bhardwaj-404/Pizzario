@@ -32,27 +32,4 @@ router.post('/login', (req, res, next) => {
     });
 });
 
-// SIGNUP
-router.post('/signup', (req, res, next) => {
-    const email = req.body.email;
-    const pw = req.body.password;
-    bcrypt.hash(pw, 12)
-    .then(hashedPW => {
-        db.getDB().db()
-        .collection('users')
-        .insertOne({email: email, pass: hashedPW})
-        .then(result => {
-            const token = createToken();    
-            res.status(201).json({ token: token, user: { email: email } });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({ message: 'Creating the user failed.' });
-        });
-    }).catch(err => {
-        console.log(err);
-        res.status(500).json({ message: 'Creating the user failed.' });
-    });
-});
-
 module.exports = router;
