@@ -23,7 +23,8 @@
 }
 
 .logo{
-    width: 60%; 
+    width: 60%;
+    border: 1px solid black; 
 }
 
 .main-header__nav-item {

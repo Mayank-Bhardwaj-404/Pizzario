@@ -6,7 +6,7 @@ import './Header.css';
 const header = props => {
     let links = (
         <ul className="main-header__nav-items"> 
-            <li className="main-header__nav-item logo">
+            <li className="main-header__nav-item">
                 <img className="logo" src="Logo.jpg" alt="Logo"></img>
             </li>
             <li className="main-header__nav-item">

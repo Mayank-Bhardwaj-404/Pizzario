@@ -61,7 +61,6 @@ class App extends Component {
       <Switch>
         <Redirect from="/" to="/products" exact />
         <Redirect from="/auth" to="/products" exact />
-        <Redirect from="/signup" to="/products" exact />
         <Route path="/product/:mode" render={props => (
             <EditProduct {...props} onError={this.errorHandler} />
           )}
@@ -84,8 +83,8 @@ class App extends Component {
     if (!this.state.isAuth) {
       routes = (
         <Switch>
-          <Redirect from="/" to="/auth" exact />
           <Redirect from="/" to="/Menu" exact/>
+          <Redirect from="/" to="/auth" exact />
           <Redirect from="/products" to="/auth" />
           <Redirect from="/product" to="/auth" />
           <Route path="/auth" render={() => (
